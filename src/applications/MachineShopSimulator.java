@@ -15,19 +15,19 @@ public class MachineShopSimulator {
     public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
     // top-level nested classes
-    private static class Task {
+    public static class Task {
         // data members
         private int machine;
         private int time;
 
         // constructor
-        private Task(int theMachine, int theTime) {
+        public Task(int theMachine, int theTime) {
             machine = theMachine;
             time = theTime;
         }
     }
 
-    private static class Job {
+    public static class Job {
         // data members
         private LinkedQueue taskQ; // this job's tasks
         private int length; // sum of scheduled task times
@@ -35,47 +35,33 @@ public class MachineShopSimulator {
         private int id; // job identifier
 
         // constructor
-        private Job(int theId) {
+        public Job(int theId) {
             id = theId;
             taskQ = new LinkedQueue();
             // length and arrivalTime have default value 0
         }
 
         // other methods
-        private void addTask(int theMachine, int theTime) {
+        public void addTask(int theMachine, int theTime) {
             taskQ.put(new Task(theMachine, theTime));
         }
 
         /**
          * remove next task of job and return its time also update length
          */
-        private int removeNextTask() {
+        public int removeNextTask() {
             int theTime = ((Task) taskQ.remove()).time;
             length += theTime;
             return theTime;
         }
     }
 
-    private static class Machine {
-        // data members
-        LinkedQueue jobQ; // queue of waiting jobs for this machine
-        int changeTime; // machine change-over time
-        int totalWait; // total delay at this machine
-        int numTasks; // number of tasks processed on this machine
-        Job activeJob; // job currently active on this machine
-
-        // constructor
-        private Machine() {
-            jobQ = new LinkedQueue();
-        }
-    }
-
-    private static class EventList {
+    public static class EventList {
         // data members
         int[] finishTime; // finish time array
 
         // constructor
-        private EventList(int theNumMachines, int theLargeTime) {// initialize
+        public EventList(int theNumMachines, int theLargeTime) {// initialize
                                                                  // finish
                                                                  // times for
                                                                  // m
