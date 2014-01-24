@@ -93,56 +93,56 @@ public class FileIoTests {
     @Test
     public void noMachinesShouldThrowException() throws IOException {
         String inputFile = "NoMachines.input";
-        String expectedMessage = MachineShopSimulator.NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1;
+        String expectedMessage = MachineShopSimExceptions.NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void noJobsShouldThrowException() throws IOException {
         String inputFile = "NoJobs.input";
-        String expectedMessage = MachineShopSimulator.NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1;
+        String expectedMessage = MachineShopSimExceptions.NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void negativeChangeOverShouldThrowException() throws IOException {
         String inputFile = "NegativeChangeOver.input";
-        String expectedMessage = MachineShopSimulator.CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0;
+        String expectedMessage = MachineShopSimExceptions.CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void negativeNumberOfTasksShouldThrowException() throws IOException {
         String inputFile = "NegativeNumberOfTasks.input";
-        String expectedMessage = MachineShopSimulator.EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK;
+        String expectedMessage = MachineShopSimExceptions.EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void zeroTasksShouldThrowException() throws IOException {
         String inputFile = "ZeroTasks.input";
-        String expectedMessage = MachineShopSimulator.EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK;
+        String expectedMessage = MachineShopSimExceptions.EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void zeroMachineNumberShouldThrowException() throws IOException {
         String inputFile = "ZeroMachineNumber.input";
-        String expectedMessage = MachineShopSimulator.BAD_MACHINE_NUMBER_OR_TASK_TIME;
+        String expectedMessage = MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void tooLargeMachineNumberShouldThrowException() throws IOException {
         String inputFile = "MachineNumberTooLarge.input";
-        String expectedMessage = MachineShopSimulator.BAD_MACHINE_NUMBER_OR_TASK_TIME;
+        String expectedMessage = MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME;
         runExceptionTest(inputFile, expectedMessage);
     }
 
     @Test
     public void zeroTaskTimeShouldThrowException() throws IOException {
         String inputFile = "ZeroTaskTime.input";
-        String expectedMessage = MachineShopSimulator.BAD_MACHINE_NUMBER_OR_TASK_TIME;
+        String expectedMessage = MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME;
         runExceptionTest(inputFile, expectedMessage);
     }
 

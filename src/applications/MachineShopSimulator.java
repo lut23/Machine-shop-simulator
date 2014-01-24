@@ -8,11 +8,7 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
 
-	public static final String NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1 = "number of machines must be >= 1";
-	public static final String NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1 = "number of machines and jobs must be >= 1";
-	public static final String CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0 = "change-over time must be >= 0";
-	public static final String EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK = "each job must have >= 1 task";
-	public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
+	
 
 	public static class EventList {
 		// data members
@@ -21,7 +17,7 @@ public class MachineShopSimulator {
 		// constructor
 		public EventList(int theNumMachines, int theLargeTime) {// initialize finish times for m machines
 			if (theNumMachines < 1)
-				throw new IllegalArgumentException(NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1);
+				throw new IllegalArgumentException(MachineShopSimExceptions.NUMBER_OF_MACHINES_MUST_BE_AT_LEAST_1);
 			finishTime = new int[theNumMachines + 1];
 
 			// all machines are idle, initialize with
@@ -129,7 +125,7 @@ public class MachineShopSimulator {
 		numMachines = keyboard.readInteger();
 		numJobs = keyboard.readInteger();
 		if (numMachines < 1 || numJobs < 1)
-			throw new MyInputException(NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1);
+			throw new MyInputException(MachineShopSimExceptions.NUMBER_OF_MACHINES_AND_JOBS_MUST_BE_AT_LEAST_1);
 
 		// create event and machine queues
 		eList = new EventList(numMachines, largeTime);
@@ -142,7 +138,7 @@ public class MachineShopSimulator {
 		for (int j = 1; j <= numMachines; j++) {
 			int ct = keyboard.readInteger();
 			if (ct < 0)
-				throw new MyInputException(CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
+				throw new MyInputException(MachineShopSimExceptions.CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
 			machine[j].changeTime = ct;
 		}
 
@@ -153,7 +149,7 @@ public class MachineShopSimulator {
 			int tasks = keyboard.readInteger(); // number of tasks
 			int firstMachine = 0; // machine for first task
 			if (tasks < 1)
-				throw new MyInputException(EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK);
+				throw new MyInputException(MachineShopSimExceptions.EACH_JOB_MUST_HAVE_AT_LEAST_1_TASK);
 
 			// create the job
 			theJob = new Job(i);
@@ -164,7 +160,7 @@ public class MachineShopSimulator {
 				int theTaskTime = keyboard.readInteger();
 				if (theMachine < 1 || theMachine > numMachines
 						|| theTaskTime < 1)
-					throw new MyInputException(BAD_MACHINE_NUMBER_OR_TASK_TIME);
+					throw new MyInputException(MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME);
 				if (j == 1)
 					firstMachine = theMachine; // job's first machine
 				theJob.addTask(theMachine, theTaskTime); // add to
