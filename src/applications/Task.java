@@ -1,13 +1,13 @@
 package applications;
 
 public class Task {
-    // data members
-     int machine;
-     int time;
+	// data members
+	public int machine;
+	public int time;
 
-    // constructor
-    public Task(int theMachine, int theTime) {
-        machine = theMachine;
-        time = theTime;
-    }
+	// constructor
+	public Task(int theMachine, int theTime) {
+		machine = theMachine;
+		time = theTime;
+	}
 }
