@@ -15,17 +15,7 @@ public class MachineShopSimulator {
     public static final String BAD_MACHINE_NUMBER_OR_TASK_TIME = "bad machine number or task time";
     
     // top-level nested classes
-    public static class Task {
-        // data members
-        private int machine;
-        private int time;
-
-        // constructor
-        public Task(int theMachine, int theTime) {
-            machine = theMachine;
-            time = theTime;
-        }
-    }
+    
 
     public static class Job {
         // data members
