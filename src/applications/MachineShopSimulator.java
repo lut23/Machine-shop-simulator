@@ -187,7 +187,4 @@ public class MachineShopSimulator {
 			System.out.println();
 		}
 	}
-
-	/** entry point for machine shop simulator */
-	
 }
