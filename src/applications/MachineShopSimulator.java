@@ -8,6 +8,9 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
 
+	
+	
+	
 	// data members of MachineShopSimulator
 	private static int timeNow; // current time
 	private static int numMachines; // number of machines
@@ -15,7 +18,17 @@ public class MachineShopSimulator {
 	private static EventList eList; // pointer to event list
 	private static Machine[] machine; // array of machines
 	private static int largeTime; // all machines finish before this
-
+	
+	//constructor for MachineShopSimulator
+		public MachineShopSimulator(int inputLargeTime, int inputTimeNow) {
+			this.timeNow = inputTimeNow;
+			this.numMachines = numMachines;
+			this.numJobs = numJobs;
+			this.eList = eList;
+			this.machine = machine;
+			this.largeTime = inputLargeTime;
+		}
+	
 	// methods
 	/**
 	 * move theJob to machine for its next task
@@ -161,18 +174,5 @@ public class MachineShopSimulator {
 	}
 
 	/** entry point for machine shop simulator */
-	public static void main(String[] args) {
-		largeTime = Integer.MAX_VALUE;
-		/*
-		 * It's vital that we (re)set this to 0 because if the simulator is called
-		 * multiple times (as happens in the acceptance tests), because timeNow
-		 * is static it ends up carrying over from the last time it was run. I'm
-		 * not convinced this is the best place for this to happen, though.
-		 */
-		timeNow = 0;
-		inputData(); // get machine and job data
-		startShop(); // initial machine loading
-		simulate(); // run all jobs through shop
-		outputStatistics(); // output machine wait times
-	}
+	
 }
