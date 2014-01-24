@@ -106,15 +106,13 @@ public class MachineShopSimulator {
 			machine[i] = new Machine();
 
 		// input the change-over times
-		System.out.println("Enter change-over times for machines");
-		for (int j = 1; j <= numMachines; j++) {
-			int ct = keyboard.readInteger();
-			if (ct < 0)
-				throw new MyInputException(MachineShopSimExceptions.CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
-			machine[j].changeTime = ct;
-		}
+		inputChangeOverTimes(keyboard);
 
 		// input the jobs
+		inputJobs(keyboard);
+	}
+
+	private static void inputJobs(MyInputStream keyboard) {
 		Job theJob;
 		for (int i = 1; i <= numJobs; i++) {
 			System.out.println("Enter number of tasks for job " + i);
@@ -127,17 +125,34 @@ public class MachineShopSimulator {
 			theJob = new Job(i);
 			System.out.println("Enter the tasks (machine, time)"
 					+ " in process order");
-			for (int j = 1; j <= tasks; j++) {// get tasks for job i
-				int theMachine = keyboard.readInteger();
-				int theTaskTime = keyboard.readInteger();
-				if (theMachine < 1 || theMachine > numMachines
-						|| theTaskTime < 1)
-					throw new MyInputException(MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME);
-				if (j == 1)
-					firstMachine = theMachine; // job's first machine
-				theJob.addTask(theMachine, theTaskTime); // add to
-			} // task queue
+			firstMachine = getTasks(keyboard, theJob, tasks, firstMachine); 
+			// task queue
 			machine[firstMachine].jobQ.put(theJob);
+		}
+	}
+
+	private static int getTasks(MyInputStream keyboard, Job theJob, int tasks,
+			int firstMachine) {
+		for (int j = 1; j <= tasks; j++) {// get tasks for job i
+			int theMachine = keyboard.readInteger();
+			int theTaskTime = keyboard.readInteger();
+			if (theMachine < 1 || theMachine > numMachines
+					|| theTaskTime < 1)
+				throw new MyInputException(MachineShopSimExceptions.BAD_MACHINE_NUMBER_OR_TASK_TIME);
+			if (j == 1)
+				firstMachine = theMachine; // job's first machine
+			theJob.addTask(theMachine, theTaskTime); // add to
+		}
+		return firstMachine;
+	}
+
+	private static void inputChangeOverTimes(MyInputStream keyboard) {
+		System.out.println("Enter change-over times for machines");
+		for (int j = 1; j <= numMachines; j++) {
+			int ct = keyboard.readInteger();
+			if (ct < 0)
+				throw new MyInputException(MachineShopSimExceptions.CHANGE_OVER_TIME_MUST_BE_AT_LEAST_0);
+			machine[j].changeTime = ct;
 		}
 	}
 
