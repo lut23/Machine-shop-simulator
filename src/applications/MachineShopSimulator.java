@@ -8,9 +8,6 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
 
-	
-	
-	
 	// data members of MachineShopSimulator
 	private static int timeNow; // current time
 	private static int numMachines; // number of machines
