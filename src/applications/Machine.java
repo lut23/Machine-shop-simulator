@@ -14,4 +14,17 @@ public class Machine {
     public Machine() {
         jobQ = new LinkedQueue();
     }
+    
+    // tells the jobQ is empty or not.
+    public boolean jobQIsEmpty(){
+    	return jobQ.isEmpty();
+    }
+    
+    // 
+    public int workOnJob() {
+		activeJob = (Job) jobQ.remove();
+		totalWait += MachineShopSimulator.getCurrentTime() - activeJob.arrivalTime;
+		numTasks++;
+		return activeJob.removeNextTask();
+	}
 }

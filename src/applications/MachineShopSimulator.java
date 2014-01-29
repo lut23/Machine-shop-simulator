@@ -8,9 +8,9 @@ import exceptions.MyInputException;
 
 public class MachineShopSimulator {
 
-	
-	
-	
+
+
+
 	// data members of MachineShopSimulator
 	private static int timeNow; // current time
 	private static int numMachines; // number of machines
@@ -18,18 +18,21 @@ public class MachineShopSimulator {
 	private static EventList eList; // pointer to event list
 	private static Machine[] machine; // array of machines
 	private static int largeTime; // all machines finish before this
-	
+
 	//constructor for MachineShopSimulator
-		public MachineShopSimulator(int inputLargeTime, int inputTimeNow) {
-			this.timeNow = inputTimeNow;
-			this.numMachines = numMachines;
-			this.numJobs = numJobs;
-			this.eList = eList;
-			this.machine = machine;
-			this.largeTime = inputLargeTime;
-		}
-	
+	public MachineShopSimulator(int inputLargeTime, int inputTimeNow) {
+		this.timeNow = inputTimeNow;
+		this.numMachines = numMachines;
+		this.numJobs = numJobs;
+		this.eList = eList;
+		this.machine = machine;
+		this.largeTime = inputLargeTime;
+	}
+
 	// methods
+	public static int getCurrentTime(){
+		return timeNow;
+	}
 	/**
 	 * move theJob to machine for its next task
 	 * 
@@ -60,29 +63,27 @@ public class MachineShopSimulator {
 	 * @return last job run on this machine
 	 */
 	static Job changeState(int theMachine) {// Task on theMachine has finished,
+		
 		// schedule next one.
 		Job lastJob;
-		if (machine[theMachine].activeJob == null) {// in idle or change-over
+		Machine currentMachine = machine[theMachine]; // machine that changeState is taking place on
+		if (currentMachine.activeJob == null) {// in idle or change-over
 			// state
 			lastJob = null;
 			// wait over, ready for new job
-			if (machine[theMachine].jobQ.isEmpty()) // no waiting job
+			if (currentMachine.jobQIsEmpty()) // no waiting job
 				eList.setFinishTime(theMachine, largeTime);
 			else {// take job off the queue and work on it
-				machine[theMachine].activeJob = (Job) machine[theMachine].jobQ
-						.remove();
-				machine[theMachine].totalWait += timeNow
-						- machine[theMachine].activeJob.arrivalTime;
-				machine[theMachine].numTasks++;
-				int t = machine[theMachine].activeJob.removeNextTask();
+				
+				int t = currentMachine.workOnJob(); 
 				eList.setFinishTime(theMachine, timeNow + t);
 			}
 		} else {// task has just finished on machine[theMachine]
 			// schedule change-over time
-			lastJob = machine[theMachine].activeJob;
-			machine[theMachine].activeJob = null;
+			lastJob = currentMachine.activeJob;
+			currentMachine.activeJob = null;
 			eList.setFinishTime(theMachine, timeNow
-					+ machine[theMachine].changeTime);
+					+ currentMachine.changeTime);
 		}
 
 		return lastJob;
