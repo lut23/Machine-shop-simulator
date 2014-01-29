@@ -27,4 +27,12 @@ public class Machine {
 		numTasks++;
 		return activeJob.removeNextTask();
 	}
+    public Job getActiveJob(){
+    	return activeJob;
+    }
+
+	public void clearActiveJob() {
+		activeJob = null;
+		
+	}
 }

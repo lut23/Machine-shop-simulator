@@ -62,27 +62,27 @@ public class MachineShopSimulator {
 	 * 
 	 * @return last job run on this machine
 	 */
-	static Job changeState(int theMachine) {// Task on theMachine has finished,
+	static Job changeState(int machineIndex) {// Task on theMachine has finished,
 		
 		// schedule next one.
-		Job lastJob;
-		Machine currentMachine = machine[theMachine]; // machine that changeState is taking place on
-		if (currentMachine.activeJob == null) {// in idle or change-over
+		
+		Machine currentMachine = machine[machineIndex]; // machine that changeState is taking place on
+		Job lastJob = currentMachine.getActiveJob();
+		if (lastJob == null) {// in idle or change-over
 			// state
-			lastJob = null;
+			
 			// wait over, ready for new job
 			if (currentMachine.jobQIsEmpty()) // no waiting job
-				eList.setFinishTime(theMachine, largeTime);
+				eList.setFinishTime(machineIndex, largeTime);
 			else {// take job off the queue and work on it
-				
 				int t = currentMachine.workOnJob(); 
-				eList.setFinishTime(theMachine, timeNow + t);
+				eList.setFinishTime(machineIndex, timeNow + t);
 			}
 		} else {// task has just finished on machine[theMachine]
 			// schedule change-over time
-			lastJob = currentMachine.activeJob;
-			currentMachine.activeJob = null;
-			eList.setFinishTime(theMachine, timeNow
+			lastJob = currentMachine.getActiveJob();
+			currentMachine.clearActiveJob();
+			eList.setFinishTime(machineIndex, timeNow
 					+ currentMachine.changeTime);
 		}
 
