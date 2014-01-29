@@ -75,8 +75,8 @@ public class MachineShopSimulator {
 			if (currentMachine.jobQIsEmpty()) // no waiting job
 				eList.setFinishTime(machineIndex, largeTime);
 			else {// take job off the queue and work on it
-				int t = currentMachine.workOnJob(); 
-				eList.setFinishTime(machineIndex, timeNow + t);
+				int jobTime = currentMachine.workOnJob(); //Time it takes to do a job 
+				eList.setFinishTime(machineIndex, timeNow + jobTime);
 			}
 		} else {// task has just finished on machine[theMachine]
 			// schedule change-over time
