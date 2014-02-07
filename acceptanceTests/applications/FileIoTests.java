@@ -23,10 +23,8 @@ import exceptions.MyInputException;
 public class FileIoTests {
 
     private static final String ACCEPTANCE_TEST_DIRECTORY = "acceptanceTests/";
-    private static final String TEST_FILE_DIRECTORY 
-        = ACCEPTANCE_TEST_DIRECTORY + "Machine_shop_test_files/";
-    private static final String EXCEPTION_TEST_FILE_DIRECTORY
-        = ACCEPTANCE_TEST_DIRECTORY + "Machine_shop_exception_test_files/";
+    private static final String TEST_FILE_DIRECTORY = ACCEPTANCE_TEST_DIRECTORY + "Machine_shop_test_files/";
+    private static final String EXCEPTION_TEST_FILE_DIRECTORY = ACCEPTANCE_TEST_DIRECTORY + "Machine_shop_exception_test_files/";
 
     /**
      * For each file in the Test_files directory with a name of the form
@@ -37,10 +35,12 @@ public class FileIoTests {
     @Test
     public final void runFileBasedTests() throws IOException {
         String[] inputFiles = collectInputFileNames();
+        
         for (String inputFile : inputFiles) {
             File outputFile = runInputFile(inputFile, TEST_FILE_DIRECTORY);
             String expectedOutputFile = generateExpectedOutputFile(inputFile);
             checkFilesMatch(expectedOutputFile, outputFile);
+            
         }
     }
 
