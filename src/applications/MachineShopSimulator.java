@@ -37,16 +37,16 @@ public class MachineShopSimulator {
 	 * @return false iff no next task
 	 */
 	static boolean moveToNextMachine(Job theJob) {
-		if (theJob.getTaskQ().isEmpty()) {// no next task
+		if (theJob.isTaskQEmpty()) {// no next task
 			System.out.println("Job " + theJob.getId() + " has completed at "
-					+ timeNow + " Total wait was " + (timeNow - theJob.length));
+					+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
 			return false;
 		} else {// theJob has a next task
 			// get machine for next task
-			int p = ((Task) theJob.getTaskQ().getFrontElement()).machine;
+			int p = ((Task) theJob.getFirstElement()).machine;
 			// put on machine p's wait queue
 			machine[p].jobQ.put(theJob);
-			theJob.arrivalTime = timeNow;
+			theJob.setArrivalTime(timeNow);
 			// if p idle, schedule immediately
 			if (eList.nextEventTime(p) == largeTime) {// machine is idle
 				changeState(p);

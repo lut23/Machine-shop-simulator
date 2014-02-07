@@ -5,8 +5,8 @@ import dataStructures.LinkedQueue;
 public class Job {
     // data members
     private LinkedQueue taskQ; // this job's tasks
-    public int length; // sum of scheduled task times
-    public int arrivalTime; // arrival time at current queue
+    private int length; // sum of scheduled task times
+    private int arrivalTime; // arrival time at current queue
     private int id; // job identifier
 
     // constructor
@@ -18,15 +18,15 @@ public class Job {
 
     // other methods
     public void addTask(int theMachine, int theTime) {
-        getTaskQ().put(new Task(theMachine, theTime));
+        taskQ.put(new Task(theMachine, theTime));
     }
 
     /**
      * remove next task of job and return its time also update length
      */
     public int removeNextTask() {
-        int theTime = ((Task) getTaskQ().remove()).time;
-        length += theTime;
+        int theTime = ((Task) taskQ.remove()).time;
+        length =(length + theTime);
         return theTime;
     }
 
@@ -34,7 +34,21 @@ public class Job {
 		return id;
 	}
 
-	public LinkedQueue getTaskQ() {
-		return taskQ;
+	public int getLength() {
+		return length;
+	}
+
+	public int getArrivalTime() {
+		return arrivalTime;
+	}
+
+	public void setArrivalTime(int arrivalTime) {
+		this.arrivalTime = arrivalTime;
+	}
+	public boolean isTaskQEmpty(){
+		return taskQ.isEmpty();
+	}
+	public Object getFirstElement(){
+		return taskQ.getFrontElement();
 	}
 }

@@ -23,7 +23,7 @@ public class Machine {
     // 
     public int workOnJob() {
 		activeJob = (Job) jobQ.remove();
-		totalWait += MachineShopSimulator.getCurrentTime() - activeJob.arrivalTime;
+		totalWait += MachineShopSimulator.getCurrentTime() - activeJob.getArrivalTime();
 		numTasks++;
 		return activeJob.removeNextTask();
 	}
