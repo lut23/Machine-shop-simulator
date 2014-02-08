@@ -20,7 +20,6 @@ public class Machine {
     	return getJobQ().isEmpty();
     }
     
-    // 
     public int workOnJob() {
     	activeJob = (Job) getJobQ().remove();
 		totalWait += MachineShopSimulator.getCurrentTime() - getActiveJob().getArrivalTime();
