@@ -25,7 +25,7 @@ public class EventList {
 		for (int i = 1; i < getFinishTime().length-1; i++)
 			if (finishTime[i+1] < smallestFinishTime) {// i finishes earlier
 				fastestMachineIndex = i+1;
-				smallestFinishTime = getFinishTime()[i+1];
+				smallestFinishTime = finishTime[i+1];
 			}
 		return fastestMachineIndex;
 	}
