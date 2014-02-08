@@ -178,7 +178,7 @@ public class MachineShopSimulator {
 	static void outputStatistics() {
 		System.out.println("Finish time = " + timeNow);
 		for (int p = 0; p < numMachines; p++) {
-			System.out.println("Machine " + (p+1) + " completed " + machine[p+1].numTasks + " tasks");
+			System.out.println("Machine " + (p+1) + " completed " + machine[p+1].getNumTasks() + " tasks");
 			System.out.println("The total wait time was " + machine[p+1].getTotalWait());
 			System.out.println();
 		}

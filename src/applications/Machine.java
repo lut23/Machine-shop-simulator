@@ -7,8 +7,8 @@ public class Machine {
     private LinkedQueue jobQ; // queue of waiting jobs for this machine
     private int changeTime; // machine change-over time
     private int totalWait; // total delay at this machine
-    int numTasks; // number of tasks processed on this machine
-    Job activeJob; // job currently active on this machine
+    private int numTasks; // number of tasks processed on this machine
+    private Job activeJob; // job currently active on this machine
 
     // constructor
     public Machine() {
@@ -22,10 +22,10 @@ public class Machine {
     
     // 
     public int workOnJob() {
-		activeJob = (Job) getJobQ().remove();
-		totalWait += MachineShopSimulator.getCurrentTime() - activeJob.getArrivalTime();
+    	activeJob = (Job) getJobQ().remove();
+		totalWait += MachineShopSimulator.getCurrentTime() - getActiveJob().getArrivalTime();
 		numTasks++;
-		return activeJob.removeNextTask();
+		return getActiveJob().removeNextTask();
 	}
     public Job getActiveJob(){
     	return activeJob;
@@ -54,5 +54,9 @@ public class Machine {
 
 	int getTotalWait() {
 		return totalWait;
+	}
+
+	int getNumTasks() {
+		return numTasks;
 	}
 }
