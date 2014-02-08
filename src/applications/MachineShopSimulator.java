@@ -79,7 +79,8 @@ public class MachineShopSimulator {
 			// schedule change-over time
 			lastJob = currentMachine.getActiveJob();
 			currentMachine.clearActiveJob();
-			eList.setFinishTime(machineIndex, timeNow + currentMachine.getChangeTime());
+			eList.setFinishTime(machineIndex, timeNow
+					+ currentMachine.getChangeTime());
 		}
 
 		return lastJob;
