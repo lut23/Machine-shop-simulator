@@ -38,8 +38,7 @@ public class MachineShopSimulator {
 	 */
 	static boolean moveToNextMachine(Job theJob) {
 		if (theJob.isTaskQEmpty()) {// no next task
-			System.out.println("Job " + theJob.getId() + " has completed at "
-					+ timeNow + " Total wait was " + (timeNow - theJob.getLength()));
+			System.out.println("Job " + theJob.getId() + " has completed at " + timeNow + " Total wait was " + (timeNow - theJob.getLength()));
 			return false;
 		} else {// theJob has a next task
 			// get machine for next task
@@ -80,8 +79,7 @@ public class MachineShopSimulator {
 			// schedule change-over time
 			lastJob = currentMachine.getActiveJob();
 			currentMachine.clearActiveJob();
-			eList.setFinishTime(machineIndex, timeNow
-					+ currentMachine.getChangeTime());
+			eList.setFinishTime(machineIndex, timeNow + currentMachine.getChangeTime());
 		}
 
 		return lastJob;
